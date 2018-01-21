@@ -14,6 +14,19 @@ immutable SparseMatrixLIL{Tv,Ti<:Integer} <: AbstractSparseMatrix{Tv,Ti}
     n :: Int
 end
 
+"""
+        SparseMatrixLIL(A :: SparseMatrixLIL)
+
+Returns A without copying.
+
+        SparseMatrixLIL(A :: SparseMatrixCSC{Tv,Ti})
+
+Converts to `SparseMatrixLIL` format (copying).
+
+        SparseMatrixLIL(A :: AbstractMatrix{Tv})
+
+Converts to `SparseMatrixLIL` format (copying).
+"""
 SparseMatrixLIL(A :: SparseMatrixLIL) = A
 SparseMatrixLIL(A :: SparseMatrixCSC{Tv,Ti}) where {Tv,Ti<:Integer} =
     SparseMatrixLIL{Tv,Ti}(map(v -> A[:,v], 1:size(A,2)), size(A)...)
